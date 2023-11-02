@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 const UserContext = React.createContext();                // This creates context
 
 function UserProvider({ children}) {                      // This creates a provider component       
-  const [user,setUser] = useState({})
+  const [user,setUser] = useState(null)
 
   useEffect(() => {
     fetch('/me')
