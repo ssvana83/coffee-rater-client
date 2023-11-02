@@ -6,13 +6,20 @@ const Navbar = () => {
   return (
     <div>
       <NavLink
+      to="/"
       >Home</NavLink>
 
       <NavLink
+      to="/signin"
       >Signin</NavLink>
 
       <NavLink
-      >Signup</NavLink>
+      to="/coffees"
+      >Coffees</NavLink>
+
+      <NavLink
+      to="/coffee/:id"
+      >Coffee</NavLink>
 
 <NavLink
       ></NavLink>
