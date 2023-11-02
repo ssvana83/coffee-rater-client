@@ -45,7 +45,7 @@ const Signin = () => {
   
   function handleSubmit(e) {
     e.preventDefault()
-    fetch("signin", {
+    fetch("/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

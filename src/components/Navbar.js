@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { UserContext } from "../context/user"
 
 const style = {
@@ -15,18 +15,24 @@ const style = {
 
 
 const Navbar = () => {
-  const{user,signout} = useContext(UserContext)
+  const {user, signout, signedIn} = useContext(UserContext)
+  const navigate = useNavigate()
 
-  const signoutUser = () => {
-    fetch('/signout')
+  const handleSignout = () => {
+    fetch('/signout', {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'}
+    })
     .then(() => {
       signout()
+      navigate('/')
     })
   }
 
-  if (user) {
+  if (signedIn) {
     return (
         <div>
+          <h1>Hello {user.username}</h1>
             <NavLink
               to="/"
               style={style}
@@ -42,7 +48,7 @@ const Navbar = () => {
               style={style}
             >Coffee</NavLink>
       
-            <button onClick={signoutUser}>Signout</button>
+            <button onClick={handleSignout}>Signout</button>
       </div>
     )
   } else {
