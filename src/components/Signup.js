@@ -1,7 +1,5 @@
 import { useState, useContext } from "react"
-
 import {UserContext} from "../context/user"
-// import {MessageContext} from "../context/message"
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -16,6 +14,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -33,36 +32,41 @@ function Copyright(props) {
 const theme = createTheme();
 
 const Signup = () => {
+  const navigate = useNavigate()
   const {signup} = useContext(UserContext);
-  // const {setMessage} = useContext(MessageContext);
-
+  const [errorsList, setErrorsList] = useState([])
   const [userObject, setUserObject] = useState({
+    username: "",
     email: "",
     password: "",
-    username: "",
     password_confirmation: ""
   });
 
-  
-
-  const handleChange = ({target: {name, value}}) => {
-    setUserObject({
-      ...userObject,
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserObject((prevUserObject) => ({
+      ...prevUserObject,
       [name]: value
-    })
+    }));
   }
 
 const handleSubmit = e => {
   e.preventDefault();
-  signup(userObject)
-  // .then(response => {
-  //   setMessage(signup);
-  //   // { message: "You are now signed up!" }
-  //   // navigate("/profile");
-  // })
-  // .catch(error => {
-  //   setMessage({ message: "Error during signup"});
-  // });
+  fetch('/signup', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userObject)
+  })
+  .then(res => res.json())
+  .then(user => {
+    if (!user.errors) {
+      signup(user)
+      navigate('/')
+      console.log(user)
+    }
+  })
 };
 
 return (
@@ -158,6 +162,9 @@ return (
                   </Grid>
                 </Grid>
               </Box>
+              <ul>
+                {errorsList}
+              </ul>
             </Box>
             <Copyright sx={{ mt: 5 }} />
           </Container>
