@@ -65,6 +65,9 @@ const handleSubmit = e => {
       signup(user)
       navigate('/')
       console.log(user)
+    } else {
+      const errorsList = user.errors.map(e => <li>{e}</li>)
+      setErrorsList(errorsList)
     }
   })
 };

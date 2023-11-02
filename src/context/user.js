@@ -19,8 +19,8 @@ function UserProvider({ children}) {                      // This creates a prov
 
   }
 
-  const signup = () => {
-
+  const signup = (user) => {
+    setUser(user)
   }
 
   const signout = () => {
