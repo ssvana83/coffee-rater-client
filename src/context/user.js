@@ -24,7 +24,7 @@ function UserProvider({ children}) {                      // This creates a prov
   }
 
   const signout = () => {
-
+    setUser(null)
   }
 
   return (
