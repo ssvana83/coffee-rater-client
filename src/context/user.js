@@ -13,8 +13,22 @@ function UserProvider({ children}) {                      // This creates a prov
     })
 
   }, [])
+
+  // this is the user in state;
+  const signin = () => {
+
+  }
+
+  const signup = () => {
+
+  }
+
+  const signout = () => {
+
+  }
+
   return (
-    <UserContext.Provider value={{user}}>                     
+    <UserContext.Provider value={{user, signin, signout, signup}}>                     
       {children}
     </UserContext.Provider>
   );

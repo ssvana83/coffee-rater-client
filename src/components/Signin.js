@@ -21,7 +21,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Coffee Rater
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -51,7 +51,8 @@ const Signin = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        userObj
+        email: userObj.email,
+        password: userObj.password,
       })
     })
     .then((r) => {
@@ -68,6 +69,14 @@ const Signin = () => {
         });
       }
     })
+  }
+
+  function handleChange(e) {
+    const{ name, value} = e.target;
+    setUserObj((previousState) => ({
+      ...previousState,
+      [name]: value,
+    }));
   }
 
   return (
@@ -98,7 +107,7 @@ const Signin = () => {
               name="email"
               autoComplete="email"
               value={userObj.email}
-              // onChange={handleChange}
+              onChange={handleChange}
               autoFocus
             />
             <TextField
@@ -109,7 +118,7 @@ const Signin = () => {
               label="Password"
               type="password"
               value={userObj.password}
-              // onChange={handleChange}
+              onChange={handleChange}
               id="password"
               autoComplete="current-password"
             />
