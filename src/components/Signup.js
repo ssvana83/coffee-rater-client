@@ -35,41 +35,40 @@ const Signup = () => {
   const navigate = useNavigate()
   const {signup} = useContext(UserContext);
   const [errorsList, setErrorsList] = useState([])
-  const [userObject, setUserObject] = useState({
-    username: "",
+  const [userObject, setUserObject] = useState({                //initializes userObject state variable which
+    username: "",                                               //represents users specific input data
     email: "",
     password: "",
     password_confirmation: ""
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserObject((prevUserObject) => ({
-      ...prevUserObject,
+  const handleChange = (e) => {                                 //extract name and value from event target
+    const { name, value } = e.target;                           //spread operator copies previous state
+      setUserObject((prevUserObject) => ({                      //and updates each field with new value
+        ...prevUserObject,
       [name]: value
     }));
   }
 
-const handleSubmit = e => {
-  e.preventDefault();
-  fetch('/signup', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userObject)
-  })
-  .then(res => res.json())
-  .then(user => {
-    if (!user.errors) {
-      signup(user)
-      navigate('/')
-      console.log(user)
-    } else {
-      const errorsList = user.errors.map(e => <li>{e}</li>)
-      setErrorsList(errorsList)
-    }
-  })
+const handleSubmit = e => {                                     //when form is submitted, a POST req. is sent
+    e.preventDefault();                                         //to "/signup" with the userObject data
+    fetch('/signup', {                                          //serialized as JSON
+        method: "POST",
+        headers: {"Content-Type": "application/json",
+      },
+        body: JSON.stringify(userObject)
+      })
+    .then(res => res.json())                                    //after receiving response from the server
+    .then(user => {                                             //its checked for errors and if there are none
+        if (!user.errors) {                                     //a signup function action is called which
+            signup(user)                                        //navigates to a different page and logs user info
+            navigate('/')
+            console.log(user)
+        } else {
+            const errorsList = user.errors.map(e => <li>{e}</li>)
+            setErrorsList(errorsList)
+        }
+      })
 };
 
 return (

@@ -13,26 +13,27 @@ const style = {
   verticalAlign: "center"
 }
 
-
 const Navbar = () => {
-  const {user, signout, signedIn} = useContext(UserContext)
+  console.log("navbar")
+  const {user, signout} = useContext(UserContext)
   const navigate = useNavigate()
 
   const handleSignout = () => {
-    fetch('/signout', {
-      method: 'DELETE',
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then(() => {
-      signout()
-      navigate('/')
-    })
+      fetch('/signout', {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'}
+      })
+      .then(() => {
+          signout()
+          navigate('/')
+      })
   }
 
-  if (signedIn) {
+  if (user) {
     return (
         <div>
           <h1>Hello {user.username}</h1>
+          <br />
             <NavLink
               to="/"
               style={style}
@@ -49,7 +50,7 @@ const Navbar = () => {
             >Coffee</NavLink>
       
             <button onClick={handleSignout}>Signout</button>
-      </div>
+        </div>
     )
   } else {
     return (

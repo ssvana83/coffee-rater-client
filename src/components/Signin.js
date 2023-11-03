@@ -35,32 +35,30 @@ const Signin = () => {
   const { signin } = useContext(UserContext)
   const navigate = useNavigate()
 
-  
-  const [errors, setErrors] = useState([])
-  const [userObj, setUserObj] = useState({
+  const [errors, setErrors] = useState([])                    //State variables used for userObj and errors
+  const [userObj, setUserObj] = useState({          
     email: "",
     password: "password"
   })
 
   
   function handleSubmit(e) {
-    e.preventDefault()
-    fetch("/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: userObj.email,
-        password: userObj.password,
-      })
-    })
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((userInfo) => signin(userInfo))
-        navigate("/")
-      } else {
-        r.json().then((err) => {
+        e.preventDefault()
+        fetch("/signin", {
+            method: "POST",
+            headers: {"Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: userObj.email,
+              password: userObj.password,
+            })
+        })
+        .then((r) => {
+          if (r.ok) {
+            r.json().then((userInfo) => signin(userInfo))
+            navigate("/")
+          } else {
+            r.json().then((err) => {
           if (err.errors) {
             setErrors(Object.values(err.errors));
           } else {
@@ -158,3 +156,9 @@ const Signin = () => {
 }
 
 export default Signin
+
+
+// body: JSON.stringify({
+//   email: userObj.email,
+//   password: userObj.password,
+//   })

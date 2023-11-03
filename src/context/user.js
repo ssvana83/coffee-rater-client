@@ -2,20 +2,18 @@ import React, { useState, useEffect } from 'react'
 
 const UserContext = React.createContext();                // This creates context
 
-function UserProvider({ children}) {                      // This creates a provider component       
-  const [user,setUser] = useState({});
-  const [signedIn, setSignedIn] = useState(false);
+function UserProvider({ children}) {                      // This creates a provider component for children      
+  const [user,setUser] = useState(null);  
+  console.log(user)                // Creates state for user 
+ 
 
   useEffect(() => {
     fetch('/me')
-    .then(r => r.json())
-    .then(data => {
-      if (data.errors) {
-        setSignedIn(false)
-      } else {
-        console.log(data)
-        setSignedIn(true)
-        setUser(data)
+    .then(r => {
+      if (r.ok) {
+      r.json()
+      .then(data => 
+        setUser(data))
       }
     })
   }, [])
@@ -23,21 +21,18 @@ function UserProvider({ children}) {                      // This creates a prov
   // this is the user in state;
   const signin = (user) => {
     setUser(user)
-    setSignedIn(true)
+  }
+
+  const signout = () => {
+    setUser(null)
   }
 
   const signup = (user) => {
     setUser(user)
-    setSignedIn(true)
-  }
-
-  const signout = () => {
-    setUser({})
-    setSignedIn(false)
   }
 
   return (
-    <UserContext.Provider value={{user, signin, signout, signup, signedIn, setUser}}>                     
+    <UserContext.Provider value={{user, signin, signout, signup, setUser}}>                      
       {children}
     </UserContext.Provider>
   );
@@ -52,3 +47,11 @@ export { UserContext, UserProvider}
 // Any child that hooks to global state can access whatevr I provide to them here
 //wrap userContext around {children} and then be sure to export it 
 // this gives me global state
+
+// useEffect(() => {
+//   fetch('/me')
+//   .then(r => r.json())
+//   .then(data => {
+//       setUser(data)
+//   })
+// }, [])
