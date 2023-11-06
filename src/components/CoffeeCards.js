@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 
 const CoffeeCards = ({coffee}) => {
 
-  const { name, coffee_origin, roaster_location, aroma, roast_level } = coffee;
+  const { name, coffee_origin, roaster_location, aroma, roast_level, reviews } = coffee;
 
   const [showCoffee, setShowCoffee] = useState(false);
   return (
@@ -15,6 +15,16 @@ const CoffeeCards = ({coffee}) => {
       <button onClick={() => setShowCoffee(!showCoffee)}>
         { showCoffee ? "Hide Reviews": "add or Show Reviews"}
       </button>
+      {showCoffee && (
+        <div>
+          <h3>Reviews: </h3>
+          <ul>
+            {reviews.map((review) => (
+            <li key={review.id}>{review.content}</li>
+          ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
