@@ -14,7 +14,6 @@ const style = {
 }
 
 const Navbar = () => {
-  console.log("navbar")
   const {user, signout} = useContext(UserContext)
   const navigate = useNavigate()
 

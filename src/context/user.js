@@ -4,7 +4,7 @@ const UserContext = React.createContext();                // This creates contex
 
 function UserProvider({ children}) {                      // This creates a provider component for children      
   const [user,setUser] = useState(null);  
-  console.log(user)                // Creates state for user 
+                   
  
 
   useEffect(() => {

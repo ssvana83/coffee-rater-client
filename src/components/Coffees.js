@@ -1,9 +1,20 @@
-import React from 'react'
+import React from 'react';
+import CoffeeCards from "./CoffeeCards";
+import "../Styles.css";
 
-const Coffees = () => {
+
+const Coffees = ({coffees}) => {
+
+  let coffeeList = coffees.map((coffee) => (
+    <CoffeeCards 
+      key={coffee.id}
+      coffee={coffee}
+    />
+  ))
   return (
     <div>
-      <h1>Index Page</h1>
+      
+      <h1>{coffeeList}</h1>
     </div>
   )
 }
