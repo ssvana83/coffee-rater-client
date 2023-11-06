@@ -156,9 +156,3 @@ const Signin = () => {
 }
 
 export default Signin
-
-
-// body: JSON.stringify({
-//   email: userObj.email,
-//   password: userObj.password,
-//   })

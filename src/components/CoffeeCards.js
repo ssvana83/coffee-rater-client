@@ -16,11 +16,15 @@ const CoffeeCards = ({coffee}) => {
         { showCoffee ? "Hide Reviews": "add or Show Reviews"}
       </button>
       {showCoffee && (
-        <div>
+        <div className="reviewcard">
           <h3>Reviews: </h3>
           <ul>
             {reviews.map((review) => (
-            <li key={review.id}>{review.content}</li>
+            <li key={review.id}>
+              <p>Review: {review.content}</p>
+              <p>Username: </p>
+            </li>
+            
           ))}
           </ul>
         </div>
