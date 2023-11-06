@@ -11,23 +11,31 @@ import Signup from './components/Signup';
 import { formControlClasses } from '@mui/material';
 
 function App() {
-
-  // added this to put coffees state here to display coffees 
   const [coffees, setCoffees] = useState([]);
-  
-  // added this to fetch all coffees from state 
+   
   useEffect(() => {
     fetch("/coffees")
     .then((r) => r.json())
     .then((r) => setCoffees(r))
   }, [])
 
+  function handleReview(newReview) {
+    const updatedCoffees = coffees.map((c) => {
+      if(c.id === newReview.coffee_id) {
+        return ({...c, reviews: [...c.reviews, newReview] })
+      } else {
+        return c
+      }
+    })
+    setCoffees(updatedCoffees)
+  }
+
   return (
     <div className="container">
       <UserProvider>
           <Navbar />
             <Routes>
-              <Route exact path="/" element={<Home coffees = {coffees}/>}></Route>
+              <Route exact path="/" element={<Home coffees = {coffees} onAddReview={handleReview}/>}></Route>
               <Route exact path="/signin" element={<Signin />}/>
               <Route exact path="/signup" element={<Signup />}/>
               <Route exact path="/coffees" element={<Coffees />}></Route>

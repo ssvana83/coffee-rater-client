@@ -12,6 +12,9 @@ const CoffeeCards = ({coffee}) => {
       <p className="p">Roaster Location: {roaster_location} </p>
       <p className="p">Aroma: {aroma} </p>
       <p className="p">Roast Level: {roast_level} </p>
+      <button onClick={() => setShowCoffee(!showCoffee)}>
+        { showCoffee ? "Hide Reviews": "add or Show Reviews"}
+      </button>
     </div>
   )
 }
