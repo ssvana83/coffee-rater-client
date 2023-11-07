@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {UserContext} from '../context/user';
+import { UserContext } from '../context/user';
 import { useContext, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
@@ -36,41 +36,42 @@ const Signin = () => {
   const navigate = useNavigate()
 
   const [errors, setErrors] = useState([])                    //State variables used for userObj and errors
-  const [userObj, setUserObj] = useState({          
+  const [userObj, setUserObj] = useState({
     email: "",
     password: "password"
   })
 
-  
+
   function handleSubmit(e) {
-        e.preventDefault()
-        fetch("/signin", {
-            method: "POST",
-            headers: {"Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: userObj.email,
-              password: userObj.password,
-            })
-        })
-        .then((r) => {
-          if (r.ok) {
-            r.json().then((userInfo) => signin(userInfo))
-            navigate("/")
-          } else {
-            r.json().then((err) => {
-          if (err.errors) {
-            setErrors(Object.values(err.errors));
-          } else {
-            setErrors([err.error])
-          }
-        });
-      }
+    e.preventDefault()
+    fetch("/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: userObj.email,
+        password: userObj.password,
+      })
     })
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((userInfo) => signin(userInfo))
+          navigate("/")
+        } else {
+          r.json().then((err) => {
+            if (err.errors) {
+              setErrors(Object.values(err.errors));
+            } else {
+              setErrors([err.error])
+            }
+          });
+        }
+      })
   }
 
   function handleChange(e) {
-    const{ name, value} = e.target;
+    const { name, value } = e.target;
     setUserObj((previousState) => ({
       ...previousState,
       [name]: value,
@@ -145,9 +146,9 @@ const Signin = () => {
               </Grid>
             </Grid>
           </Box>
-              <ul>
-                {errors}
-              </ul>
+          <ul>
+            {errors}
+          </ul>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
