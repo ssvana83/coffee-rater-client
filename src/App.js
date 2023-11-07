@@ -68,7 +68,6 @@ function App() {
       <UserProvider>
         <Navbar />
         <Routes>
-          
           <Route exact path="/coffees" element={<CoffeesContainer />} />
           <Route exact path="/reviews" element={<ReviewsContainer />} />
           <Route exact path="/signin" element={<Signin />} />

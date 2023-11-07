@@ -6,7 +6,8 @@ const ReviewCard = ({ review }) => {
 
   return (
     <div className="card">
-      <h2 className="p">{review.content}</h2>
+      <h2 className="p" >{review.content}</h2>
+      <p className="p" >Review written by:</p>
     </div>
   )
 }
