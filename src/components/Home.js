@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from '../context/user'
 import Coffees from './Coffees'
 
-const Home = ({coffees, onAddReview}) => {
+const Home = ({coffees, onAddReview, onDeleteCoffeeReview, onUpdateCoffeeReview}) => {
   const { user } = useContext(UserContext)
 
   if (!user || user.error) {
@@ -16,7 +16,7 @@ const Home = ({coffees, onAddReview}) => {
       <div>
         <h3>{user.username} Home</h3>
         <h1>
-          <Coffees coffees={coffees} onAddReview={onAddReview}/>
+          <Coffees coffees={coffees} onAddReview={onAddReview} onDeleteCoffeeReview={onDeleteCoffeeReview} onUpdateCoffeeReview={onUpdateCoffeeReview}/>
         </h1>
       </div>
     )

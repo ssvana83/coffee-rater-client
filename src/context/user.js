@@ -5,8 +5,6 @@ const UserContext = React.createContext();                // This creates contex
 function UserProvider({ children}) {                      // This creates a provider component for children      
   const [user,setUser] = useState(null);  
                    
- 
-
   useEffect(() => {
     fetch('/me')
     .then(r => {
@@ -18,7 +16,6 @@ function UserProvider({ children}) {                      // This creates a prov
     })
   }, [])
 
-  // this is the user in state;
   const signin = (user) => {
     setUser(user)
   }
@@ -37,8 +34,6 @@ function UserProvider({ children}) {                      // This creates a prov
     </UserContext.Provider>
   );
 }
-  
-
 
 export { UserContext, UserProvider}
 
@@ -48,10 +43,3 @@ export { UserContext, UserProvider}
 //wrap userContext around {children} and then be sure to export it 
 // this gives me global state
 
-// useEffect(() => {
-//   fetch('/me')
-//   .then(r => r.json())
-//   .then(data => {
-//       setUser(data)
-//   })
-// }, [])
