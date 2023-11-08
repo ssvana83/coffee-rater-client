@@ -49,9 +49,9 @@ const Navbar = () => {
             >My Reviewed Coffees</NavLink>
 
             <NavLink
-              to="/coffee/:id"
+              to="/myreviews"
               style={style}
-            >Coffee</NavLink>
+            >My Reviews</NavLink>
       
             <button onClick={handleSignout}>Signout</button>
         </div>

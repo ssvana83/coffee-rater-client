@@ -25,8 +25,6 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
     }
   }
 
-  
-
   const handleAddReview = (newReview) => {
     const coffeeWithNewReview = [...coffee.reviews,(newReview)]
     const copyCoffeeReview = {...coffee, reviews:coffeeWithNewReview}
