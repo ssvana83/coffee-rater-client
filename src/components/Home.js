@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../context/user'
 import Coffees from './Coffees'
+import CoffeesList from './CoffeesList'
 
 const Home = ({coffees, onAddReview, onDeleteCoffeeReview, onUpdateCoffeeReview}) => {
   const { user } = useContext(UserContext)
@@ -9,14 +10,14 @@ const Home = ({coffees, onAddReview, onDeleteCoffeeReview, onUpdateCoffeeReview}
     return (
     <div>
       <h3>Please Signin or Signup</h3>
-      <Coffees coffees={coffees}/>
+      <CoffeesList coffees={coffees} />
       </div>)
   } else {
     return (
       <div>
         <h3>{user.username} Home</h3>
         <h1>
-          <Coffees coffees={coffees} onAddReview={onAddReview} onDeleteCoffeeReview={onDeleteCoffeeReview} onUpdateCoffeeReview={onUpdateCoffeeReview}/>
+          <CoffeesList coffees={coffees} onAddReview={onAddReview} onDeleteCoffeeReview={onDeleteCoffeeReview} onUpdateCoffeeReview={onUpdateCoffeeReview}/>
         </h1>
       </div>
     )

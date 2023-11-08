@@ -7,49 +7,59 @@ import { useContext } from 'react';
 const ReviewForm = ({ coffee, onAddReview }) => {
 
   const [errors, setErrors] = useState([]);
-  const [review, setReviews] = useState({
-    content: ""
-  })
+  const [review, setReview] = useState("")
 
-  const [content, setContent] = useState("");
+  // const [content, setContent] = useState("");
   const { user, setUser } = useContext(UserContext)
   const navigate = useNavigate()
 
-  const handleChange = (e) => {
-    setReviews({
-      ...review,
-      [e.target.name]: e.target.value
-    })
-  }
+  // const handleChange = (e) => {
+  //   setReview({
+  //     ...review,
+  //     [e.target.name]: e.target.value
+  //   })
+  // }git add .
 
   function handleSubmit(e) {
     e.preventDefault();
-    if([review.content].some(val => val.trim() === "")) {
-      alert("you must fill all fields")
-    }
-
     fetch("/reviews", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',
       },
-      body: JSON.stringify({review: content}),
+      body: JSON.stringify({
+        content: review, 
+        coffee_id: coffee.id
+      }),
     })
-      .then((resp) => {
-        if (resp.status === 201) {
-            navigate("/reviews")
+      .then(res => res.json())
+      .then(data => {
+        if (!data.errors) {
+          
+          onAddReview(data)
+          setReview("")
         } else {
-            resp.json().then(errorObj => setErrors(errorObj.error))
+          const errorList = data.errors.map((e) => (
+            <div key={e}>
+              <ul style={{color:"red"}}>{e}</ul>
+              {user.id ? "" :
+            <div>  
+            </div>
         }
-    })
-    .catch(err => setErrors(err.message))
-  }
+        </div>
+          ))
+          setErrors(errorList)
+        }
+      })
+    }
+        
+  
 
   return (
     <>
       <h3 className="p" >Create a Review for this Coffee</h3>
       <form className="p" onSubmit={handleSubmit}>
         <label htmlFor="content">Review</label>
-        <input onChange={handleChange} type="text" id="review" value={content} /><br />
+        <input onChange={(e) => setReview(e.target.value)} type="text" name="review" value={review} /><br />
         <input type="submit" value="Submit Review"/>
       </form>
     </>

@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import ReviewForm from './ReviewForm';
 import ReviewsList from './ReviewsList';
+import { useContext } from 'react'
+import { UserContext } from '../context/user'
 
-const CoffeeCard = ({ coffee, onAddReview }) => {
-
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
+  console.log(coffee.id)
+  const { user, setUser } = useContext(UserContext)
+  
   const { name, coffee_origin, roaster_location, aroma, roast_level, reviews } = coffee;
 
   const [showCoffee, setShowCoffee] = useState(false);
@@ -15,11 +19,37 @@ const CoffeeCard = ({ coffee, onAddReview }) => {
     setShowReviews(!showReviews)
   }
 
-  
-  const handleAddReview = () => {
+  const handleAddReviewButton = () => {
     setShowReviewForm(!showReviewForm)
+    
   }
 
+  // function handleReview(newReview) {
+  //   const updatedCoffee = {...coffee, reviews: [...reviews, newReview] }
+  //   (() => {
+  //     if (coffee.id === newReview.coffee_id) {
+  //       return ({ ...coffee, reviews: [...coffee.reviews, newReview] })
+  //     } else {
+  //       return coffee
+  //     }
+  //   })
+  //   setShowCoffee(updatedCoffees)
+  // }
+
+  const handleAddReview = (newReview) => {
+    const coffeeWithNewReview = [...coffee.reviews,(newReview)]
+    const copyCoffeeReview = {...coffee, reviews:coffeeWithNewReview}
+    const userWithNewReview = {...user, reviews: [...user.reviews,(newReview)]}
+    const coffeesWithNewReview = coffees.map(coffee => {
+        if (copyCoffeeReview.id === coffee.id){
+            return copyCoffeeReview 
+        } else {
+            return coffee
+        }
+    })
+    // setCoffees(coffeesWithNewReview)
+    setUser(userWithNewReview)
+}
   return (
     <div className="card">
       <h2 className="header">{name}</h2>
@@ -33,10 +63,10 @@ const CoffeeCard = ({ coffee, onAddReview }) => {
       </button>
       {showReviews && <ReviewsList coffee={coffee} />}
 
-      <button onClick={handleAddReview}>
+      <button onClick={handleAddReviewButton}>
         {showReviewForm ? "Hide Review Form" : "Add a Review"}
       </button>
-      {showReviewForm && (<ReviewForm coffee={coffee} onAddReview={onAddReview}/>
+      {showReviewForm && (<ReviewForm coffee={coffee} onAddReview={handleAddReview}/>
       )}
     </div>
   )

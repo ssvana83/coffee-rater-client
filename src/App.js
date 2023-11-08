@@ -9,6 +9,7 @@ import ReviewsContainer from './containers/ReviewsContainer';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import { formControlClasses } from '@mui/material';
+import CoffeesList from './components/CoffeesList';
 
 function App() {
   const [coffees, setCoffees] = useState([]);
@@ -19,16 +20,16 @@ function App() {
       .then((r) => setCoffees(r))
   }, [])
 
-  function handleReview(newReview) {
-    const updatedCoffees = coffees.map((c) => {
-      if (c.id === newReview.coffee_id) {
-        return ({ ...c, reviews: [...c.reviews, newReview] })
-      } else {
-        return c
-      }
-    })
-    setCoffees(updatedCoffees)
-  }
+  // function handleReview(newReview) {
+  //   const updatedCoffees = coffees.map((c) => {
+  //     if (c.id === newReview.coffee_id) {
+  //       return ({ ...c, reviews: [...c.reviews, newReview] })
+  //     } else {
+  //       return c
+  //     }
+  //   })
+  //   setCoffees(updatedCoffees)
+  // }
 
   function handleDeleteReview(deletedReview) {
     const coffeeReviewList = coffees.find(c => c.id === deletedReview.coffee_id).reviews
@@ -68,11 +69,11 @@ function App() {
       <UserProvider>
         <Navbar />
         <Routes>
-          <Route exact path="/coffees" element={<CoffeesContainer />} />
+          <Route exact path="/coffees" element={<CoffeesList coffees={coffees} setCoffees={setCoffees} />} />
           <Route exact path="/reviews" element={<ReviewsContainer />} />
           <Route exact path="/signin" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/" element={<Home coffees={coffees} onAddReview={handleReview} onDeleteCoffeeReview={handleDeleteReview} onUpdateCoffeeReview={handleUpdateReview} />}></Route>
+          <Route exact path="/" element={<Home coffees={coffees} onDeleteCoffeeReview={handleDeleteReview} onUpdateCoffeeReview={handleUpdateReview} />}></Route>
         </Routes>
       </UserProvider>
     </div>
