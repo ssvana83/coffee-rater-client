@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { UserContext } from '../context/user'
 
 const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
-  console.log(coffee.id)
+
   const { user, setUser } = useContext(UserContext)
   
   const { name, coffee_origin, roaster_location, aroma, roast_level, reviews } = coffee;
