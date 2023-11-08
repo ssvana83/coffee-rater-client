@@ -10,6 +10,7 @@ import Signin from './components/Signin';
 import Signup from './components/Signup';
 import { formControlClasses } from '@mui/material';
 import CoffeesList from './components/CoffeesList';
+import MyCoffeesList from './components/MyCoffeesList';
 
 function App() {
   const [coffees, setCoffees] = useState([]);
@@ -69,6 +70,7 @@ function App() {
       <UserProvider>
         <Navbar />
         <Routes>
+          <Route exact path="/coffeesreviewed" element={<MyCoffeesList coffees={coffees} />}/>
           <Route exact path="/coffees" element={<CoffeesList coffees={coffees} setCoffees={setCoffees} />} />
           <Route exact path="/reviews" element={<ReviewsContainer />} />
           <Route exact path="/signin" element={<Signin />} />

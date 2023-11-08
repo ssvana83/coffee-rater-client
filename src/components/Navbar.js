@@ -44,6 +44,11 @@ const Navbar = () => {
             >Coffees</NavLink>
 
             <NavLink
+              to="/coffeesreviewed"
+              style={style}
+            >My Reviewed Coffees</NavLink>
+
+            <NavLink
               to="/coffee/:id"
               style={style}
             >Coffee</NavLink>

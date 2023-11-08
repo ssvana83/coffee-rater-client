@@ -5,7 +5,7 @@ import { UserContext } from '../context/user'
 
 
 const CoffeesList = ({ coffees, setCoffees }) => {
-console.log(coffees)
+
   const { user, setUser } = useContext(UserContext)
   
 

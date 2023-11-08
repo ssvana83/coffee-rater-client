@@ -19,15 +19,16 @@ const ReviewForm = ({ coffee, onAddReview }) => {
       },
       body: JSON.stringify({
         content: review, 
-        coffee_id: coffee.id
+        coffee_id: coffee.id,
+        user_id: user.id
       }),
     })
       .then(res => res.json())
       .then(data => {
         if (!data.errors) {
-          
           onAddReview(data)
           setReview("")
+          
         } else {
           const errorList = data.errors.map((e) => (
             <div key={e}>
