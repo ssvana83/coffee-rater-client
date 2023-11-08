@@ -13,28 +13,19 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const [showCoffee, setShowCoffee] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
-  // console.log(coffee)
 
   const handleShowReviews = () => {
     setShowReviews(!showReviews)
   }
-
   const handleAddReviewButton = () => {
-    setShowReviewForm(!showReviewForm)
-    
+    if(!user) {
+        <p>Please Sign in to create a review</p>
+    } else {
+      setShowReviewForm(!showReviewForm)
+    }
   }
 
-  // function handleReview(newReview) {
-  //   const updatedCoffee = {...coffee, reviews: [...reviews, newReview] }
-  //   (() => {
-  //     if (coffee.id === newReview.coffee_id) {
-  //       return ({ ...coffee, reviews: [...coffee.reviews, newReview] })
-  //     } else {
-  //       return coffee
-  //     }
-  //   })
-  //   setShowCoffee(updatedCoffees)
-  // }
+  
 
   const handleAddReview = (newReview) => {
     const coffeeWithNewReview = [...coffee.reviews,(newReview)]
@@ -47,7 +38,6 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
             return coffee
         }
     })
-    // setCoffees(coffeesWithNewReview)
     setUser(userWithNewReview)
 }
   return (

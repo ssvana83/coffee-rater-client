@@ -8,17 +8,8 @@ const ReviewForm = ({ coffee, onAddReview }) => {
 
   const [errors, setErrors] = useState([]);
   const [review, setReview] = useState("")
-
-  // const [content, setContent] = useState("");
   const { user, setUser } = useContext(UserContext)
   const navigate = useNavigate()
-
-  // const handleChange = (e) => {
-  //   setReview({
-  //     ...review,
-  //     [e.target.name]: e.target.value
-  //   })
-  // }git add .
 
   function handleSubmit(e) {
     e.preventDefault();
