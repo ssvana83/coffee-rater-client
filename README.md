@@ -10,7 +10,7 @@ Install dependencies: `npm install`
 
 ### Run the App:
 Start the development server: `npm start`
-Open your browser and visit `http://localhost:3001`
+Open your browser and visit `http://localhost:3000`
 
 
 ## Features
