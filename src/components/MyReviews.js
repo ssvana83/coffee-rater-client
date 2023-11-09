@@ -4,10 +4,10 @@ import { UserContext } from '../context/user'
 import ReviewCard from './ReviewCard'
 
 
-const MyReviews = () => {
+const MyReviews = ({onUpdateCoffeeReview}) => {
   
   const { user, setUser } = useContext(UserContext)
-  const renderMyReviews = user.reviews.map(r => <ReviewCard key={r.id} review={r} />)
+  const renderMyReviews = user.reviews.map(r => <ReviewCard key={r.id} review={r} onUpdateCoffeeReview={onUpdateCoffeeReview}/>)
   
   return (
     <div>{renderMyReviews}</div>
@@ -15,3 +15,5 @@ const MyReviews = () => {
 }
 
 export default MyReviews
+
+//  onUpdateCoffeeReview={handleUpdateReview}

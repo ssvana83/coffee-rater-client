@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const EditReviewForm = ({onUpdateCoffeeReview}) => {
-  const [review, setReview] = useState("")
+const EditReviewForm = ({ onUpdateCoffeeReview, review }) => {
+  const [reviewValues, setReviewValues] = useState({content: review.content})
+  const navigate = useNavigate()
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -10,18 +12,21 @@ const EditReviewForm = ({onUpdateCoffeeReview}) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(review)
+      body: JSON.stringify({content: reviewValues.content})
     })
-      .then((res) => res.json())
-      .then(updatedCakes => onUpdateCoffeeReview(updatedCakes))
-  }
+      .then((res) => res.json()
+      .then((updatedCoffees) => onUpdateCoffeeReview(updatedCoffees))
+      
+  )
+      navigate ('/coffees')
+}
   
   return (
     <>
             <h3>Edit Review</h3>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="title">Title</label>
-                <input type="text" name="title" value={review} onChange={(e) =>setReview(e.target.value)} /><br />
+                <label htmlFor="title">Review</label>
+                <input type="text" name="title" value={reviewValues.content} placeholder="edit this review here" onChange={(e) => setReviewValues({...reviewValues, content: e.target.value})} /><br />
                 
                 <input type="submit" value="Edit Review" />
             </form>

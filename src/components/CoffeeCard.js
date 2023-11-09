@@ -37,6 +37,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
         }
     })
     setUser(userWithNewReview)
+    setCoffees(coffeesWithNewReview)
 }
   return (
     <div className="card">

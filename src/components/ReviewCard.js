@@ -1,17 +1,14 @@
 import React, { useState, useEffect }from 'react'
-import ReviewForm from './ReviewForm'
+import EditReviewForm from './EditReviewForm'
 import { useContext } from 'react'
 import { UserContext } from '../context/user'
 
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review, onUpdateCoffeeReview }) => {
   const { user, setUser } = useContext(UserContext)
-  
   const username = review.username
-  console.log(user)
-  
-
   const [showButton, setShowButton] = useState(false)
+  const [showEditForm, setShowEditForm] = useState(false)
 
   useEffect(() => {
     if (user.id == review.user_id) {
@@ -19,12 +16,20 @@ const ReviewCard = ({ review }) => {
     }
   }, []) 
 
+  const toggleEditForm = () => {
+    setShowEditForm(!showEditForm)
+  };
+  // onclick here to put in the button below
+
   return (
     <div className="card">
       <h2 className="p" >{review.content}</h2>
       <p className="p" >Review written by: {username}</p>
       {showButton? (
-        <button>Update my Review</button>
+        <div>
+        <button onClick={toggleEditForm}>Update my Review</button>
+        {showEditForm && <EditReviewForm review={review} onUpdateCoffeeReview={onUpdateCoffeeReview}/>}
+        </div>
       ) : (null)}
     </div>
   )
