@@ -16,7 +16,6 @@ const EditReviewForm = ({ onUpdateCoffeeReview, review }) => {
     })
       .then((res) => res.json()
       .then((updatedCoffees) => onUpdateCoffeeReview(updatedCoffees))
-      
   )
       navigate ('/coffees')
 }
@@ -27,7 +26,6 @@ const EditReviewForm = ({ onUpdateCoffeeReview, review }) => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="title">Review</label>
                 <input type="text" name="title" value={reviewValues.content} placeholder="edit this review here" onChange={(e) => setReviewValues({...reviewValues, content: e.target.value})} /><br />
-                
                 <input type="submit" value="Edit Review" />
             </form>
         </>

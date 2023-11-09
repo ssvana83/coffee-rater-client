@@ -36,6 +36,7 @@ const ReviewCard = ({ review, onUpdateCoffeeReview, onDeleteCoffeeReview }) => {
 
   return (
     <div className="card">
+      <h2 className = "p"> </h2>
       <h2 className="p" >{review.content}</h2>
       <p className="p" >Review written by: {username}</p>
       {showButton? (

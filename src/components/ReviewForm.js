@@ -4,7 +4,7 @@ import { UserContext } from '../context/user';
 import { useContext } from 'react';
 
 
-const ReviewForm = ({ coffee, onAddReview }) => {
+const ReviewForm = ({ coffee, onAddReview, onUpdateCoffeeReview }) => {
 
   const [errors, setErrors] = useState([]);
   const [review, setReview] = useState("")

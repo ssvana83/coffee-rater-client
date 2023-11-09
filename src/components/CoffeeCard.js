@@ -4,7 +4,7 @@ import ReviewsList from './ReviewsList';
 import { useContext } from 'react'
 import { UserContext } from '../context/user'
 
-const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees, onUpdateCoffeeReview }) => {
 
   const { user, setUser } = useContext(UserContext)
   
@@ -55,7 +55,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       <button onClick={handleAddReviewButton}>
         {showReviewForm ? "Hide Review Form" : "Add a Review"}
       </button>
-      {showReviewForm && (<ReviewForm coffee={coffee} onAddReview={handleAddReview}/>
+      {showReviewForm && (<ReviewForm coffee={coffee} onAddReview={handleAddReview} onUpdateCoffeeReview={onUpdateCoffeeReview}/>
       )}
     </div>
   )

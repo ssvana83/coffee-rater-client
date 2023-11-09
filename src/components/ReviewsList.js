@@ -1,7 +1,7 @@
 import React from 'react';
 import ReviewCard from './ReviewCard';
 
-const ReviewsList = ({ coffee }) => {
+const ReviewsList = ({ coffee, onUpdateCoffeeReview }) => {
   
   const reviews = coffee.reviews
   const renderReviews = reviews.map(review => <ReviewCard key={review.id} review={review} />)
