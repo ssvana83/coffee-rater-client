@@ -71,12 +71,14 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path="/myreviews" element={<MyReviews coffees={coffees} onUpdateCoffeeReview={handleUpdateReview} onDeleteCoffeeReview={handleDeleteReview}/>}/>
-          <Route exact path="/coffeesreviewed" element={<MyCoffeesList coffees={coffees} />}/>
-          <Route exact path="/coffees" element={<CoffeesList coffees={coffees} setCoffees={setCoffees} onUpdateCoffeeReview={handleUpdateReview}/>} />
+          
           <Route exact path="/reviews" element={<ReviewsContainer />} />
           <Route exact path="/signin" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/" element={<Home coffees={coffees} onDeleteCoffeeReview={handleDeleteReview} onUpdateCoffeeReview={handleUpdateReview} />}></Route>
+
+          <Route exact path="/coffees" element={<CoffeesList coffees={coffees} setCoffees={setCoffees} onUpdateCoffeeReview={handleUpdateReview}/>} />
+          <Route exact path="/coffeesreviewed" element={<MyCoffeesList coffees={coffees} />}/>
+          <Route exact path="/" element={<Home coffees={coffees} />}></Route>
         </Routes>
       </UserProvider>
     </div>

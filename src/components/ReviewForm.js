@@ -49,7 +49,7 @@ const ReviewForm = ({ coffee, onAddReview, onUpdateCoffeeReview }) => {
   return (
     <>
       <h3 className="p" >Create a Review for this Coffee</h3>
-      <form className="p" onSubmit={handleSubmit}>
+      <form className="p" onSubmit={handleSubmit} onUpdateCoffeeReview={onUpdateCoffeeReview} >
         <label htmlFor="content">Review</label>
         <input onChange={(e) => setReview(e.target.value)} type="text" name="review" value={review} /><br />
         <input type="submit" value="Submit Review"/>
