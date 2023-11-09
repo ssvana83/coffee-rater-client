@@ -36,7 +36,10 @@ function App() {
 
   function handleDeleteReview(deletedReview) {
     const coffeeReviewList = coffees.find(c => c.id === deletedReview.coffee_id).reviews
+    console.log(coffeeReviewList)
     const updatedReviews = coffeeReviewList.filter((r) => r.id !== deletedReview.id)
+    console.log(updatedReviews)
+    console.log(updatedCoffees)
     const updatedCoffees = coffees.map((c) => {
       if (c.id === deletedReview.coffee_id) {
         return { ...c, reviews: updatedReviews }
@@ -49,6 +52,7 @@ function App() {
 
   function handleUpdateReview(updatedReview) {
     const coffeeReviews = coffees.find(c => c.id === updatedReview.coffee_id).reviews
+    console.log(coffeeReviews)
     const updatedReviews = coffeeReviews.map((r) => {
       if (r.id === updatedReview.id) {
         return updatedReview
@@ -56,6 +60,7 @@ function App() {
         return r;
       }
     });
+    console.log(updatedReviews)
 
     const updatedCoffees = coffees.map((c) => {
       if (c.id === updatedReview.coffee_id) {
@@ -65,6 +70,7 @@ function App() {
       }
     })
     setCoffees(updatedCoffees)
+    console.log(updatedCoffees)
   }
 
   return (
@@ -72,7 +78,7 @@ function App() {
       <UserProvider>
         <Navbar />
         <Routes>
-          <Route exact path="/myreviews" element={<MyReviews coffees={coffees} onUpdateCoffeeReview={handleUpdateReview}/>}/>
+          <Route exact path="/myreviews" element={<MyReviews coffees={coffees} onUpdateCoffeeReview={handleUpdateReview} onDeleteCoffeeReview={handleDeleteReview}/>}/>
           <Route exact path="/coffeesreviewed" element={<MyCoffeesList coffees={coffees} />}/>
           <Route exact path="/coffees" element={<CoffeesList coffees={coffees} setCoffees={setCoffees} />} />
           <Route exact path="/reviews" element={<ReviewsContainer />} />

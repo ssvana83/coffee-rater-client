@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { UserContext } from '../context/user'
 
 
-const ReviewCard = ({ review, onUpdateCoffeeReview }) => {
+const ReviewCard = ({ review, onUpdateCoffeeReview, onDeleteCoffeeReview }) => {
   const { user, setUser } = useContext(UserContext)
   const username = review.username
   const [showButton, setShowButton] = useState(false)
@@ -19,7 +19,20 @@ const ReviewCard = ({ review, onUpdateCoffeeReview }) => {
   const toggleEditForm = () => {
     setShowEditForm(!showEditForm)
   };
-  // onclick here to put in the button below
+
+  const handleDeleteReview = () => {
+    fetch(`/reviews/${review.id}`, {
+      method: "DELETE",
+    })
+    .then((r) => {
+      console.log(r)
+      if (r.ok) {
+        onDeleteCoffeeReview(review)
+      }
+    })
+  }
+  
+  
 
   return (
     <div className="card">
@@ -31,6 +44,7 @@ const ReviewCard = ({ review, onUpdateCoffeeReview }) => {
         {showEditForm && <EditReviewForm review={review} onUpdateCoffeeReview={onUpdateCoffeeReview}/>}
         </div>
       ) : (null)}
+        <button onClick={handleDeleteReview}>Delete Review</button>
     </div>
   )
 }
