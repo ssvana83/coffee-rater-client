@@ -52,9 +52,10 @@ function App() {
 
   function handleUpdateReview(updatedReview) {
     const coffeeReviews = coffees.find(c => c.id === updatedReview.coffee_id).reviews
-    console.log(coffeeReviews)
     const updatedReviews = coffeeReviews.map((r) => {
       if (r.id === updatedReview.id) {
+        console.log("r", r.id)
+        console.log(updatedReview, updatedReview.id)
         return updatedReview
       } else {
         return r;
